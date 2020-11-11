@@ -58,7 +58,9 @@ def main(testkitRepoPath, driverRepoPath, driverTargetBranch):
         "TEAMCITY_USER":     getenv("TEAMCITY_USER"),
         "TEAMCITY_PASSWORD": getenv("TEAMCITY_PASSWORD"),
     }
-    check_call(["python3", "main.py"], env=testkitEnv, cwd=testkitRepoPath)
+    check_call(
+        ["python3", "main.py"],
+        env=testkitEnv, cwd=testkitRepoPath, universal_newlines=True)
 
 
 if __name__ == "__main__":

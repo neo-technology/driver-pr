@@ -1,5 +1,6 @@
 import sys
 import re
+from os import getenv
 from os.path import abspath
 from subprocess import check_call, call, check_output
 
@@ -50,10 +51,12 @@ def main(testkitRepoPath, driverRepoPath, driverTargetBranch):
 
     # Run testkit
     testkitEnv = {
-        "TEST_DRIVER_NAME": driverName,
-        "TEST_DRIVER_REPO": driverRepoPath,
-        "TEST_IN_TEAMCITY": "1",
-        "TEST_BRANCH":      testkitBranch,
+        "TEST_DRIVER_NAME":  driverName,
+        "TEST_DRIVER_REPO":  driverRepoPath,
+        "TEST_IN_TEAMCITY":  "1",
+        "TEST_BRANCH":       testkitBranch,
+        "TEAMCITY_USER":     getenv("TEAMCITY_USER"),
+        "TEAMCITY_PASSWORD": getenv("TEAMCITY_PASSWORD"),
     }
     check_call(["python3", "main.py"], env=testkitEnv, cwd=testkitRepoPath)
 

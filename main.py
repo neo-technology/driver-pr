@@ -27,7 +27,7 @@ def get_testkit_branch(driverName, driverTargetBranch):
     return driverTargetBranch
 
 
-def main(testkitRepoPath, driverRepoPath, driverTargetBranch):
+def main(testkitRepoPath, driverTargetBranch):
     testkitRepoPath = abspath(testkitRepoPath)
     driverRepoPath = abspath(driverRepoPath)
     driverName = getenv('TEST_DRIVER_NAME') #probe_driver_repo_for_name(driverRepoPath)
@@ -67,4 +67,4 @@ def main(testkitRepoPath, driverRepoPath, driverTargetBranch):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+    main(sys.argv[1], sys.argv[2])

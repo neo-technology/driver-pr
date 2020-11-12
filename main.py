@@ -1,10 +1,9 @@
 import sys
-import re
 from os import getenv
 from os.path import abspath
-from subprocess import check_call, call, check_output
+from subprocess import check_call, DEVNULL
 
-remote = "origin"
+remote = "upstream"
 
 
 def get_testkit_branch(driverName, driverTargetBranch):
@@ -22,8 +21,15 @@ def main(testkitRepoPath, driverTargetBranch):
     testkitBranch = get_testkit_branch(driverName, driverTargetBranch)
     print("Testkit branch is {}".format(testkitBranch))
 
-    check_call(["git", "fetch", remote], cwd=testkitRepoPath)
-    check_call(["git", "checkout", "{}/{}".format(remote, testkitBranch)], cwd=testkitRepoPath)
+    # Git writes non-errors to stderr which indicates error to TeamCity
+    check_call(
+        ["git", "fetch", remote],
+        cwd=testkitRepoPath,
+        stderr=DEVNULL)
+    check_call(
+        ["git", "checkout", "{}/{}".format(remote, testkitBranch)],
+        cwd=testkitRepoPath,
+        stderr=DEVNULL)
 
 
 if __name__ == "__main__":

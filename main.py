@@ -4,7 +4,7 @@ from os import getenv
 from os.path import abspath
 from subprocess import check_call, call, check_output
 
-remote = "remote"
+remote = "origin"
 
 
 def get_testkit_branch(driverName, driverTargetBranch):
